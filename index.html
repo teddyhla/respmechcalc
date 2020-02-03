@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Draft Lung Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <h2><center>
+    Draft Lung Mecahnics Calculator
+  </center></h2>
+  <h3><center>
+    DISCLAIMER
+  </center></h3>
+  <p>
+    This is a website for calculation of lung mechanics during mechanical ventilation.
+    It is for educational usage only.By using this calculator, you accept that the full responsiblity and liability of your patient's care and that there is no responsiblity and/or liability towards the original authours.
+  <br />
+  <br />
+  This site contains copyrighted information based on publised scientific data on lung mechanics.This site is devleoped by Dr. Teddy Tun Win Hla, <a href="https://www.researchgate.net/profile/Francesco_Vasques">Dr Francesco Vasques</a> and <a href="https://www.guysandstthomas.nhs.uk/our-services/consultant-profiles/critical-care/luigi-camporota.aspx">Dr Luigi Camporota</a>.
+  </p>
+  <br />
+  <hr />
+
+
+  <h2>Step 1 : Theoretical Normal Values</h2>
+  <script src="index.js" charset="utf-8"></script>
+  <form>
+    <label> Height (in metres)</label>
+    <input type="number" id="height" name="height" min="1" max="2.5" step="0.01" />
+  </form>
+  <br />
+<label for="sex-select">Sex: </label>
+  <select id="gender">
+
+    <option value="female">
+      Female
+    </option>
+    <option value="male">
+      Male
+    </option>
+  </select>
+  <br/>
+  <button onclick="calc()">Calculate </button>
+<hr />
+
+  <p>Estimated Theoretical FRC is <span id="answer" class = "emphasis"></span> in litres.
+  </p>
+  <p>
+    Estimated Theoretical Respiratory System Compliance is <span id="ans2" class="emphasis"></span>  in ml/cmH20.
+  </p>
+<hr />
+
+  <h2>Step 2 : Assessment of Respiratory Mechanics </h2>
+  <form>
+    <label> Tidal Volume (in mililitres)</label>
+    <input type="number" id="tidalVol" name="tidalVol" min="50" max="999" step="1" />
+    <label> Respitory Rate per minute</label>
+    <input type="number" id="respRate" name = "respRate" min="4" max = "60" step="1" />
+    <p>
+      Perform a 5 second <span class="emphasis">inspiratory</span> hold to measure Peak airway Pressure (Ppeak) and Plateau Pressure (Pplat).
+      <br />
+      <br />
+      <label>Peak airway Pressure (in cmH2O)</label>
+      <input type="number" id="peakAirwayP" name = "peakAirwayP" min="1" max="50" step="1" />
+      <br />
+      <label>Pleateau Pressure(in cmH2O)</label>
+      <input type="number" id="plateauP" name = "plateauP" min="1" max="50" step="1" />
+    </p>
+  </form>
+    <p>
+      Now, perform a 5 secondary <span class="emphasis">expiratory</span> hold to measure total PEEP pressure (PEEPtot).
+    </p>
+    <form>
+      <label>PEEP total (PEEPtot) in cmH20</label>
+      <input type = "number" id="peepTot" name = "peepTot" min="1" max="40" step="1" />
+    </form>
+    <br />
+    <button onclick="calc2()">Calculate </button>
+<hr />
+    <p>The driving pressure (deltaP) is <span id="deltaP" class = "emphasis"></span> in cmH20.
+    </p>
+    <p>
+      Actual respiratory system compliance (Crs-actual) is <span id="cRsActual" class="emphasis"></span>  in ml/cmH20.
+    </p>
+    <p>
+      Estimate of an actual FRC is <span id="actualFRC" class = "emphasis"></span> in litres.
+    </p>
+    <p>
+      Calculated PEEP volume is <span id="peepVol" class = "emphasis"></span>  in mililitres.
+    </p>
+    <hr />
+    <p>
+      Now, press calculate below for further results on airway resistances and mechanical power.
+    </p>
+    <button onclick="calc3()">Calculate </button>
+    <p>
+      Calculated airway resistances (Raw) is <span id="rAirway" class = "emphasis"></span> in cmH20/litres/second.
+    </p>
+    <p>
+      Calculated dynamic strain (Strain dyn) is <span id="dynamicStrain" class = "emphasis"></span> in dynes.
+    </p>
+    <p>
+      Calculated total strain (Strain tot) is <span id="totalStrain" class = "emphasis"></span> in dynes.
+    </p>
+    <p>
+      Calculated mecahnical power of the system (MPrs) is <span id="mechPower" class = "emphasis"></span> in Joules/min.
+    </p>
+
+<!--
+need to put a reset button.
+need to put a div to divide
+need to put an educational section next to the calculations.
+need to format the layout.
+-->
+
+
+</body>
+
+</html>
