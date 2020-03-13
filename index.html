@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Respiratory Mechanics Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="disclaimertext">
+    <h2>
+      <center>
+        Respiratory Mecahnics Calculator
+      </center>
+    </h2>
+    <h3>
+      <center>
+        DISCLAIMER
+      </center>
+    </h3>
+    <p>
+      This is a website for calculation of lung mechanics during mechanical ventilation.
+      It is intended for educational usage . By using this calculator, you accept the full responsiblity and liability of your patient's care and that there is no responsiblity and/or liability towards the original authours.
+      <br />
+      <br />
+      This site contains copyrighted information based on publised scientific data on lung mechanics. It is devleoped by <a href="https://www.researchgate.net/profile/Teddy_Tun_Win_Hla" target="_blank">Dr. Teddy Tun Win Hla, </a><a
+        href="https://www.researchgate.net/profile/Francesco_Vasques" target="_blank"> Dr Francesco Vasques </a> and <a href="https://www.guysandstthomas.nhs.uk/our-services/consultant-profiles/critical-care/luigi-camporota.aspx" target="_blank"> Dr
+        Luigi Camporota </a>.
+    </p>
+    <p>
+      This site is currently still being developed and in alpha testing phase. If any queries or feedback, please contact <a href="mailto:teddyhla@gmail.com?Subject=Feedback" target="_top">teddyhla@gmail.com</a>.
+      <br />
+      <br />
+      Please click <a href="version.html">here</a> for version history and future vision.
+    </p>
+  </div>
+
+
+  <div class="steps">
+
+
+    <h2>Step 1 : Theoretical Normal Values</h2>
+    <script src="index.js" charset="utf-8"></script>
+    <div class="container">
+      <div class="divL">
+        <form>
+          <label> Height (metres)</label>
+          <input type="number" id="height" name="height" min="1" max="2.5" step="0.01" />
+        </form>
+        <br />
+        <label for="sex-select">Sex: </label>
+        <select id="gender">
+
+          <option value="female">
+            Female
+          </option>
+          <option value="male">
+            Male
+          </option>
+        </select>
+        <br />
+        <br />
+        <button onclick="calc()">Calculate </button>
+      </div>
+      <div class="divR">
+
+        <p>Estimated Theoretical FRC (FRC<sub>theoretical</sub>) is <span id="answer" class="emphasis"></span> litres.
+        </p>
+        <p>
+          Estimated Theoretical Respiratory System Compliance is(C<sub>RS-Theoretical</sub>) <span id="ans2" class="emphasis"></span> ml/cmH<sub>2</sub>O.
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <h2>Step 2 : Assessment of Respiratory Mechanics </h2>
+
+    <div class="container">
+      <div class="divL">
+        <form>
+          <label> Tidal Volume (mililitres)</label>
+          <input type="number" id="tidalVol" name="tidalVol" min="50" max="999" step="1" />
+          <label> Respitory Rate (per minute)</label>
+          <input type="number" id="respRate" name="respRate" min="4" max="60" step="1" />
+          <br />
+          <label> Inspiratory Time (seconds)</label>
+          <input type="number" id="inspTime" name="inspTime" min="0.1" max="60" step="0.1" />
+          <p>
+            Perform a 5 second <span class="emphasis">inspiratory</span> hold to measure Peak airway Pressure (Ppeak) and Plateau Pressure (Pplat).
+            <br />
+            <br />
+            <label>Peak airway Pressure (cmH<sub>2</sub>O)</label>
+            <input type="number" id="peakAirwayP" name="peakAirwayP" min="1" max="50" step="1" />
+            <br />
+            <label>Pleateau Pressure(cmH<sub>2</sub>O)</label>
+            <input type="number" id="plateauP" name="plateauP" min="1" max="50" step="1" />
+          </p>
+        </form>
+        <p>
+          Now, perform a 5 secondary <span class="emphasis">expiratory</span> hold to measure total PEEP pressure (PEEPtot).
+        </p>
+        <form>
+          <label>PEEP total (PEEPtot) cmH<sub>2</sub>O</label>
+          <input type="number" id="peepTot" name="peepTot" min="1" max="40" step="1" />
+        </form>
+        <br />
+        <button onclick="calc2()">Calculate </button>
+        <br />
+        <p>
+          For instructions on how to perform inspiratory and expiratory hold, please click the relevant link for your ventilator.
+          <br />
+          <a href="https://www.hamilton-medical.com/en_GB/News/Newsletter-articles/Article~2017-05-09~Bedside-tip%3A-How-to-measure-driving-pressure~d86f5713-a749-49ec-988f-e3403f7ca4dc~.html" target="_blank"> Hamilton </a>
+
+          <a href="https://www.draeger.com/Library/Content/lpp-booklet-9066355-en.pdf" target="_blank"> Draeger on page 38.</a>
+
+          <a href="http://elearning.maquet.com/servo-u/story_html5.html" target="_blank"> Maquet Servo on slide 48</a>
+        </p>
+      </div>
+
+      <div class="divR">
+        <p>The driving pressure (ΔP) is <span id="deltaP" class="emphasis"></span> cmH<sub>2</sub>O.
+        </p>
+        <p>
+          Actual respiratory system compliance (C<sub>RS-Actual</sub>) is <span id="cRsActual" class="emphasis"></span> ml/cmH<sub>2</sub>O.
+        </p>
+        <p>
+          Estimate of an actual FRC is <span id="actualFRC" class="emphasis"></span> litres.
+        </p>
+        <p>
+          Calculated PEEP volume is <span id="peepVol" class="emphasis"></span> mililitres.
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="container">
+      <div class="divL">
+        <p>
+          Now, press calculate below for further results on airway resistances and mechanical power.
+        </p>
+        <button onclick="calc3()">Calculate </button>
+      </div>
+      <div class="divR">
+        <p>
+          Calculated airway resistances (Raw) is <span id="rAirway" class="emphasis"></span> cmH<sub>2</sub>O/litres/second.
+        </p>
+        <p>
+          Calculated dynamic strain (Strain<sub>dynamic</sub>) is <span id="dynamicStrain" class="emphasis"></span>.
+        </p>
+        <p>
+          Calculated total strain (Strain<sub>total</sub>) is <span id="totalStrain" class="emphasis"></span>.
+        </p>
+        <p>
+          Calculated mecahnical power of the system (MP<sub>RS</sub>) is <span id="mechPower" class="emphasis"></span> Joules/min.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+
+    <h2>Step 3 : Low Flow PV Loop </h2>
+
+    <p>
+      Modify pressure and volume alarms on your ventilator to Pressure limit of 45 cmH<sub>2</sub>O and Volume limit of 1000ml.
+    </p>
+    <p>
+      Perform a recruitment maneouvre of sustained inflation at 40cmH<sub>2</sub>O for 10 seconds. <span class="emphasis">Mind the cuff pressure! </span>
+    </p>
+    <p>Perform a PV loop procedure, with starting pressure 5 to maximum pressure of 40cmH<sub>2</sub>O, volume limit 12ml/kg, flow 8l/seconds, and run inspiratory and expiratory loops.
+      <br />
+      <p>
+        <span class="emphasis">&#9888;Please note this procedure can affect haemodnyamic stability.</span>
+      </p>
+      <p>
+        For instructions on how to perform PV Loops, please click the relevant link for your ventilator.
+        <br />
+        <a href="https://www.hamilton-medical.com/en_GB/Solutions/Protective-Ventilation--P-V--Tool.html" target="_blank"> Hamilton </a>
+        <a href="https://www.draeger.com/Library/Content/LowFlow-fs-9107780-e-1911-1.pdf" target="_blank"> Draeger</a>
+        <br />
+
+      </p>
+    </p>
+
+
+    <div class="container">
+      <div class="divL">
+
+        <form>
+          <label> Compliance of the whole PV curve (Crs-tot)</label>
+          <input type="number" id="crsTOT" name="crsTOT" min="1" max="100" step="1" />
+        </form>
+        <p>
+          Use cursor to 1 and 2 to find the best (most linear) interval.
+        </p>
+        <form>
+          <label> Crs best</label>
+          <input type="number" id="crsTOT" name="crsTOT" min="1" max="100" step="1" />
+          <label>C20/Crs-tot (%)</label>
+          <input type="number" id="cRatio" name="cRatio" min="1" max="100" step="1" />
+          <br />
+          <br />
+          <label>Inspiratory Capacity(mililitres) is volumed reached at 40cmH<sub>2</sub>O </label>
+          <input type="number" id="inspCapacity" name="inspCapacity" min="100" max="5000" step="10" />
+        </form>
+        <button onclick="calc4()">Calculate </button>
+
+
+      </div>
+      <div class="divR">
+
+        <p>VT/Inspiratory Capacity is <span id="vtByIC" name="vtByIC" class="emphasis"></span>% .
+        </p>
+        <p>
+          VT + Peep Volume / Inspiratory Capacity is <span id="vtpeepvolByIC" name="vtpeepvolByIC" class="emphasis"></span> %.
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <h2>Step 4 : Potential for Lung Recruitment </h2>
+  <p>
+    Set PEEP to 15 cmH<sub>2</sub>O, keep ΔP 15 cmH<sub>2</sub>O and remaining settings unchanged on PC-AC
+  </p>
+  <p>
+    Link the variation of PEEP and Pins on the ventilator settings, reduce PEEP to 5 but keep ΔP 15 and freeze.
+  </p>
+  <p>
+    Use the cursor to measure the volume of the last breath at PEEP 15 and first breath at PEEP 5.
+  </p>
+  <p>
+    <span class="emphasis">&#9888; High PEEP can increase right ventricle afterload, and also may worsen gas exchange.</span>
+  </p>
+
+  <div class="container">
+    <div class="divL">
+
+      <p>
+        Measure the volume of the last breath at 15 and first breath at 5 PEEP.
+        <br />
+        <br />
+        <label>Volume at PEEP <span class="emphasis">5</span></label> in mililitres.
+        <input type="number" id="volumeAt5" name="volumeAt5" min="50" max="2000" step="10" />
+        <br />
+        <label>Volume at PEEP <span class="emphasis">15</span></label> in mililitres.
+        <input type="number" id="volumeAt15" name="volumeAt15" min="50" max="2000" step="10" />
+      </p>
+      <p>
+
+        Calculate Δ PEEP volume, ΔV and ΔV<sub>recruitment</sub>.
+      </p>
+      <button onclick="calc5()">Calculate </button>
+
+    </div>
+    <div class="divR">
+      <p>
+        The Δ PEEP volume is <span id="deltaPEEPVolume" name="deltaPEEPVolume" class="emphasis"></span> mililitres.
+      </p>
+      <p>
+        The ΔV volume is <span id="deltaVolume" name="deltaVolume" class="emphasis"></span> mililitres.
+        <br />
+        <br />
+        The ΔV<sub>recruitment</sub> is <span id="deltaVolumeRecruitment" name="deltaVolumeRecruitment" class="emphasis"></span> mililitres.
+      </p>
+
+
+    </div>
+  </div>
+  </div>
+
+  <br />
+  <br />
+  <button class="buttonlarge" onclick="gx()">Print this page</button>
+  <button class="buttonlarge" onclick="window.location.reload();"> Reset Variables</button>
+  <br />
+  <br />
+</body>
+
+
+
+<!--
+need to put a reset button.
+need to put a div to divide
+need to put an educational section next to the calculations.
+need to format the layout.
+-!>
+
+
+</body>
+
+</html>
